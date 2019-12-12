@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/purple">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        app:cardCornerRadius="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/newTask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="casual"
+                android:text="Create New Task"
+                android:textColor="@color/purple"
+                android:textSize="25sp"
+                android:textStyle="bold"
+
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/taskTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:paddingStart="5dp"
+                android:text="Task name"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/newTask"
+                app:layout_constraintTop_toBottomOf="@+id/newTask"
+
+                />
+
+            <EditText
+                android:id="@+id/title_ed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ems="1"
+                android:hint="Title"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                app:layout_constraintEnd_toEndOf="@+id/taskTitle"
+                app:layout_constraintStart_toStartOf="@+id/taskTitle"
+                app:layout_constraintTop_toBottomOf="@+id/taskTitle" />
+
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="8dp"
+                android:paddingStart="5dp"
+                android:text="Description"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/newTask"
+                app:layout_constraintTop_toBottomOf="@+id/title_ed"
+
+                />
+
+            <EditText
+                android:id="@+id/detail_ed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ems="100"
+                android:hint="Description"
+                android:inputType="textMultiLine"
+                android:maxLines="4"
+                app:layout_constraintEnd_toEndOf="@id/description"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/title_ed"
+                app:layout_constraintTop_toBottomOf="@+id/description" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardButtons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/purple"
+                android:outlineSpotShadowColor="@color/green"
+                app:cardBackgroundColor="@color/purple"
+                app:cardCornerRadius="20dp"
+                android:layout_marginStart="5dp"
+
+                app:layout_constraintStart_toStartOf="@+id/detail_ed"
+                app:layout_constraintTop_toBottomOf="@id/detail_ed">
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <RadioButton
+                        android:id="@+id/low"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/green"
+                        android:checked="true"
+                        android:layout_marginEnd="10dp"
+
+                        android:scaleX="1.5"
+                        android:scaleY="1.5"/>
+
+                    <RadioButton
+                        android:id="@+id/medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/yellow"
+                        android:layout_marginEnd="10dp"
+                        android:scaleX="1.5"
+                        android:scaleY="1.5"/>
+
+                    <RadioButton
+                        android:id="@+id/high"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/red"
+
+                        android:scaleX="1.5"
+                        android:scaleY="1.5"/>
+
+                </RadioGroup>
+            </com.google.android.material.card.MaterialCardView>
+
+            <Button
+                android:id="@+id/add_todo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:accessibilityHeading="false"
+
+                android:background="@color/purple2"
+                android:hapticFeedbackEnabled="true"
+                android:text="Add"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardButtons" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

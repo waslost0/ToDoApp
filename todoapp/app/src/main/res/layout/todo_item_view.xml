@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="120dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewItem"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        app:cardCornerRadius="5dp"
+
+        app:cardPreventCornerOverlap="false"
+        app:strokeColor="@color/green"
+        app:strokeWidth="10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/priority_imgView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </FrameLayout>
+
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="8dp"
+                android:ems="1"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/frameLayout"
+                app:layout_constraintTop_toTopOf="@+id/frameLayout"
+                tools:text="Todo goes in here"
+
+                />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+
+                android:ellipsize="end"
+                android:ems="1"
+                android:maxLines="3"
+                app:layout_constraintEnd_toStartOf="@id/deleteTask"
+                app:layout_constraintStart_toStartOf="@id/title"
+                app:layout_constraintTop_toBottomOf="@id/title"
+
+                tools:text="Info" />
+
+
+            <ImageView
+                android:id="@+id/deleteTask"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/ic_del"
+                android:outlineSpotShadowColor="@color/red"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>
