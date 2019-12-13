@@ -27,3 +27,9 @@ Lang: Kotlin
 
 
 ### [RoadMap]()
+
+## VID
+
+## IDE & Technologi
+[<img src="https://img.youtube.com/vi/qHKI1iZGjYc/maxresdefault.jpg" width="50%">](https://youtu.be/qHKI1iZGjYc)
+
