@@ -1,73 +1,95 @@
 package com.example.todo.todolistapp.Todo
 
+import android.media.Image
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import com.example.todo.todolistapp.R
-import com.example.todo.todolistapp.data.local.models.Todo
-import java.util.ArrayList
+import com.example.todo.todolistapp.data.local.Todo
+import kotlinx.android.synthetic.main.todo_item_view.view.*
 
 
-class TodoAdapter(var todoList: List<Todo>? = ArrayList<Todo>()): RecyclerView.Adapter<TodoAdapter.TodoViewHolder>(){
+class TodoAdapter : ListAdapter<Todo, TodoAdapter.NoteHolder>(DIFF_CALLBACK) {
 
-    private var onTodoItemClickedListener: OnTodoItemClickedListener?= null
-
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
-        val layout = if (itemCount == 0) R.layout.empty_view else R.layout.todo_item_view
-        val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
-
-        return TodoViewHolder(view, todoList!!)
-    }
-
-    override fun getItemCount(): Int {
-        return if(todoList!!.isEmpty()) 0 else todoList!!.size
-    }
-
-    override fun onBindViewHolder(holder: TodoViewHolder, position: Int){
-
-        holder.view.setOnClickListener{onTodoItemClickedListener!!.onTodoItemClicked(todoList!!.get(position))}
-
-        holder.view.setOnLongClickListener{
-            onTodoItemClickedListener!!.onTodoItemLongClicked(todoList!![position])
-            true
-        }
-        holder.onBindViews(position)
-    }
-
-    inner class TodoViewHolder(val view: View, val todoList: List<Todo>): RecyclerView.ViewHolder(view){
-        fun onBindViews(position: Int){
-            if (itemCount != 0){
-                view.findViewById<TextView>(R.id.title).text = todoList[position].title
-                view.findViewById<TextView>(R.id.description).text = todoList[position].detail
-
-                view.findViewById<ImageView>(R.id.priority_imgView).setImageResource(getImage(todoList[position].priority))
-//                view.findViewById<ImageView>(R.id.deleteTask).setImageResource(R.drawable.ic_delete)
-                view.findViewById<ImageView>(R.id.deleteTask).setOnClickListener {
-                    onTodoItemClickedListener!!.deleteItem(todoList[position])
-                }
-
-
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Todo>() {
+            override fun areItemsTheSame(oldItem: Todo, newItem: Todo): Boolean {
+                return oldItem.id == newItem.id
             }
 
+            override fun areContentsTheSame(oldItem: Todo, newItem: Todo): Boolean {
+                return oldItem.title == newItem.title && oldItem.description == newItem.description
+                        && oldItem.priority == newItem.priority
+            }
+        }
+    }
+
+    private var listener: OnItemClickListener? = null
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteHolder {
+        val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.todo_item_view, parent, false)
+        return NoteHolder(itemView)
+    }
+
+
+    override fun onBindViewHolder(holder: NoteHolder, position: Int) {
+        val currentNote: Todo = getItem(position)
+
+        holder.textViewTitle.text = currentNote.title
+
+        holder.textViewPriority.setImageResource(getImage(currentNote.priority))
+
+        holder.textViewDescription.text = currentNote.description
+    }
+
+    fun getNoteAt(position: Int): Todo {
+        return getItem(position)
+    }
+
+    inner class NoteHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    listener?.onItemClick(getItem(position))
+                }
+            }
+
+            itemView.findViewById<ImageView>(R.id.deleteTask).setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    listener?.onDeleteItemClick(getItem(position))
+                }
+            }
         }
 
+        var textViewTitle: TextView = itemView.title
+        var textViewPriority: ImageView = itemView.priority_imgView
+        var textViewDescription: TextView = itemView.description
 
-        private fun getImage(priority: Int): Int
-        = if (priority == 1) R.drawable.low_priority else if(priority == 2) R.drawable.medium_priority else R.drawable.high_priority
     }
 
-    fun setTodoItemClickedListener(onTodoItemClickedListener: OnTodoItemClickedListener){
-        this.onTodoItemClickedListener = onTodoItemClickedListener
+    private fun getImage(priority: Int): Int =
+            when (priority) {
+                1 -> R.drawable.low_priority
+                2 -> R.drawable.medium_priority
+                else -> R.drawable.high_priority
+            }
+
+    interface OnItemClickListener {
+        fun onItemClick(note: Todo)
+        fun onDeleteItemClick(note: Todo)
+
     }
 
-    interface OnTodoItemClickedListener{
-        fun onTodoItemClicked(todo: Todo)
-        fun onTodoItemLongClicked(todo: Todo)
-        fun deleteItem(todo: Todo)
-        fun restoreItem(todo : Todo)
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
     }
+
 }
