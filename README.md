@@ -33,7 +33,7 @@ Lang: Kotlin
 [<img src="https://img.youtube.com/vi/qHKI1iZGjYc/maxresdefault.jpg" width="50%">](https://youtu.be/qHKI1iZGjYc)
 
 0.2
-[<img src="https://img.youtube.com/vi/_pFFNkvlxZc/default.jpg" width="50%">](https://youtu.be/_pFFNkvlxZc)
+[<img src="https://img.youtube.com/vi/_pFFNkvlxZc/maxresdefault.jpg" width="50%">](https://youtu.be/_pFFNkvlxZc)
 
 
 
